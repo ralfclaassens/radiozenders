@@ -2,8 +2,7 @@ import UIKit
 
 class TrackCell: UICollectionViewCell {
     @IBOutlet weak var coverImage: UIImageView!
-    @IBOutlet weak var trackName: UILabel!
-    @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var bgView: UIView!
     
     override func awakeFromNib() {

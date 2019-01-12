@@ -7,18 +7,14 @@ typealias JSONArray = [JSONDictionary]
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,MusicCellProtocol,AVAudioPlayerDelegate {
 
     @IBOutlet weak var mTrackImage: UIImageView!
-    @IBOutlet weak var mTrackName: UILabel!
     @IBOutlet weak var mDuration: UILabel!
-    @IBOutlet weak var mArtistName: UILabel!
+    @IBOutlet weak var mName: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var trackPlayerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var playerBlur: UIView!
     @IBOutlet weak var playPauseButton:UIButton!
 
-//    var category = [Category]()
-//    var categories = [Categories]()
-//    var stations = [Station]()
     var categories = [Category]()
     var audioPlayer:AVPlayer?
     var myTimer:Timer!
@@ -58,55 +54,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
             do {
                 let categoryData = try JSONDecoder().decode([Category].self, from: data)
-                
-//                DispatchQueue.main.async {
-                    print(categoryData)
-                    self.categories = categoryData
-//                    self.collectionView?.reloadData()
+                self.categories = categoryData
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
-//                }
+                }
                 
             } catch let jsonError {
                 print(jsonError)
-            }
-            
+            }            
             
         }.resume()
-        
-//        do{
-//            let jsonData = try Data(contentsOf: path!, options: Data.ReadingOptions.mappedIfSafe)
-//            let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers) as?[String:AnyObject]
-//
-//            let categoriesList = jsonResult?["categories"] as! NSArray
-//
-//            for categoryIndex in categoriesList {
-//                let categoryFromApi = categoryIndex as? [String:AnyObject]
-//                let category = Category()
-//
-//                category.name = categoryFromApi?["name"] as? String
-//
-//                let stationList = categoryFromApi?["stations"] as! NSArray
-//
-//                for stationIndex in stationList{
-//                    let stationFromApi = stationIndex as? [String:AnyObject]
-//                    let station = Station()
-//                    station.id = stationFromApi?["id"] as? String
-//                    station.name = stationFromApi?["name"] as? String
-//                    station.stream = stationFromApi?["stream_url"] as? String
-//                    station.image = stationFromApi?["image_url"] as? String
-//                    self.stations.append(station)
-//                }
-//
-//                category.stations = self.stations
-//
-//                self.category.append(category)
-//            }
-//
-//            self.tableView.reloadData()
-//
-//        }catch{
-//            print(error.localizedDescription)
-//        }
     }
     
     func customNavbar(){
@@ -174,11 +131,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     func didTapOnTrack(cell: MusicCell, indexPath: IndexPath) {
         let k = tableView.indexPath(for: cell)
-//        playTrack(station: (self.categories[k!.row].categories?[indexPath.row].stations.first)!)
+        playStation(station: self.categories[k!.row].Stations[indexPath.row])
         print("Location:\(k!.row) \(indexPath.row)")
     }
 
-    func playTrack(station:Station){
+    func playStation(station: Station){
         tableView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: playerBlur.frame.height, right: 0)
         trackPlayerView.isHidden = false
         let musicURL = URL(string:station.stream)
@@ -187,18 +144,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.audioPlayer?.play()
         playPauseButton.setImage(UIImage(named:"pause"), for: .normal)
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
+        
         mTrackImage.setImageWithUrl(url: NSURL(string:station.image)!)
-        mTrackName.text = station.name
-        mArtistName.text = station.id
+        mName.text = station.name
     }
 
     @objc func updateProgressBar(){
 
-            let t1 =  self.audioPlayer?.currentTime()
-            let t2 =  self.audioPlayer?.currentItem?.asset.duration
+        let t1 =  self.audioPlayer?.currentTime()
+        let t2 =  self.audioPlayer?.currentItem?.asset.duration
 
-            let current = CMTimeGetSeconds(t1!)
-            let total =  CMTimeGetSeconds(t2!)
+        let current = CMTimeGetSeconds(t1!)
+        let total = CMTimeGetSeconds(t2!)
 
         if Int(current) != Int(total){
 
@@ -228,7 +185,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             audioPlayer?.pause()
             playPauseButton.setImage(UIImage(named:"play"), for: .normal)
         }
-
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

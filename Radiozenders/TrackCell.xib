@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,14 +27,8 @@
                                     <constraint firstAttribute="height" constant="140" id="aGD-wS-kM5"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist_Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSE-Kq-vqD">
-                                <rect key="frame" x="2" y="161.5" width="108" height="12.5"/>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="10"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track_Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wD-Mu-4mm">
-                                <rect key="frame" x="2" y="144" width="108" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wD-Mu-4mm">
+                                <rect key="frame" x="2" y="144" width="108" height="14"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,15 +36,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SSE-Kq-vqD" firstAttribute="leading" secondItem="xV6-q3-9m8" secondAttribute="leading" constant="2" id="8jd-fn-3uj"/>
                             <constraint firstItem="6wD-Mu-4mm" firstAttribute="leading" secondItem="xV6-q3-9m8" secondAttribute="leading" constant="2" id="Wfw-VM-eYW"/>
                             <constraint firstItem="6wD-Mu-4mm" firstAttribute="top" secondItem="lJM-J5-i9c" secondAttribute="bottom" constant="4" id="atC-v3-7jj"/>
                             <constraint firstItem="lJM-J5-i9c" firstAttribute="top" secondItem="xV6-q3-9m8" secondAttribute="top" id="c69-aq-CuN"/>
-                            <constraint firstItem="SSE-Kq-vqD" firstAttribute="top" secondItem="6wD-Mu-4mm" secondAttribute="bottom" constant="4" id="hjn-3R-xkg"/>
                             <constraint firstAttribute="trailing" secondItem="lJM-J5-i9c" secondAttribute="trailing" id="oqv-pt-Tq5"/>
                             <constraint firstAttribute="trailing" secondItem="6wD-Mu-4mm" secondAttribute="trailing" id="p66-fH-Ter"/>
                             <constraint firstItem="lJM-J5-i9c" firstAttribute="leading" secondItem="xV6-q3-9m8" secondAttribute="leading" id="sin-t7-faE"/>
-                            <constraint firstAttribute="trailing" secondItem="SSE-Kq-vqD" secondAttribute="trailing" id="yj8-0L-Daq"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -63,10 +54,9 @@
             </constraints>
             <size key="customSize" width="120" height="207"/>
             <connections>
-                <outlet property="artistName" destination="SSE-Kq-vqD" id="Fqq-A7-CT4"/>
                 <outlet property="bgView" destination="xV6-q3-9m8" id="BpK-8O-vXN"/>
                 <outlet property="coverImage" destination="lJM-J5-i9c" id="gCw-Ra-CKf"/>
-                <outlet property="trackName" destination="6wD-Mu-4mm" id="aB7-yn-WrV"/>
+                <outlet property="name" destination="6wD-Mu-4mm" id="aB7-yn-WrV"/>
             </connections>
             <point key="canvasLocation" x="65" y="136.5"/>
         </collectionViewCell>

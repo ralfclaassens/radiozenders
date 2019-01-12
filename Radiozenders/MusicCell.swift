@@ -22,18 +22,16 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
     var delegate:MusicCellProtocol? = nil
     var stations:[Station]?
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
     }
+
     @IBAction func didTapOnSeeAll(_ sender: Any) {
         if let _  = delegate{
             delegate?.didTapSeeAll(cell: self, indexPath: indexPath!)
         }
     }
-
-
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -46,9 +44,8 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
         indexPath = index
         self.stations = stations
         self.collectionView.reloadData()
-
-
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -59,12 +56,10 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TrackCell
-
-
         let obj = stations?[indexPath.row]
-        cell.artistName.text = obj!.name
-        cell.trackName.text = obj!.name
-        cell.coverImage.setImageWithUrl(url: NSURL(string:(obj?.image)!)!)
+        let imageBase = "https://www.radiozenders.fm/media/images/stations/"
+        cell.name.text = obj!.name
+        cell.coverImage.setImageWithUrl(url: NSURL(string:imageBase + (obj?.image)!)!)
         return cell
     }
 
@@ -74,6 +69,7 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
             delegate?.didTapOnTrack(cell: self, indexPath: indexPath)
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
@@ -85,7 +81,5 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 185)
     }
-
-
 
 }
