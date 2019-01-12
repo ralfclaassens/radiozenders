@@ -1,0 +1,37 @@
+{
+  "categories" : [ {
+    "id": 1,
+    "name": "NPO stations",
+    "stations" : [ {
+      "id" : "1",
+      "name" : "Radio 1",
+      "stream_url" : "http://icecast.omroep.nl/radio1-bb-mp3",
+      "image_url" : "https://www.radiozenders.fm/media/images/stations/npo-radio-1.png"
+    }, {
+      "id" : "2",
+      "name" : "Radio 2",
+      "stream_url" : "http://icecast.omroep.nl/radio2-bb-mp3",
+      "image_url" : "https://www.radiozenders.fm/media/images/stations/npo-radio-2.png"
+    }, {
+      "id" : "3",
+      "name" : "3FM",
+      "stream_url" : "http://icecast.omroep.nl/3fm-bb-mp3",
+      "image_url" : "https://www.radiozenders.fm/media/images/stations/npo-3fm.png"
+    } ]
+  },
+  {
+    "id": 2,
+    "name": "Sky Radio stations",
+    "stations" : [ {
+      "id" : "4",
+      "name" : "Sky radio",
+      "stream_url" : "http://playerservices.streamtheworld.com/api/livestream-redirect/SKYRADIO.mp3",
+      "image_url" : "https://www.radiozenders.fm/media/images/stations/sky-radio.png"
+    }, {
+      "id" : "5",
+      "name" : "Sky radio 80's hits",
+      "stream_url" : "http://playerservices.streamtheworld.com/api/livestream-redirect/SRGSTR04.mp3",
+      "image_url" : "https://www.radiozenders.fm/media/images/stations/sky-radio-80s-hits.png"
+    } ]
+  } ]
+}
