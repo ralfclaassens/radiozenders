@@ -16,8 +16,5 @@ class TrackCell: UICollectionViewCell {
         self.bgView.layer.shouldRasterize = true
         self.bgView.layer.cornerRadius = 4
         self.layer.cornerRadius =  4
-        
     }
-    
-    
 }

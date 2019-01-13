@@ -1,24 +1,4 @@
 import Foundation
-//
-//
-//class Categories:NSObject{
-//    var name:String?
-//    var categories:[Category]?
-//}
-//
-//class Category:NSObject{
-//    var id:String?
-//    var name:String?
-//    var stations:[Station]?
-//}
-//
-//class Station:NSObject{
-//    var id:String?
-//    var name:String?
-//    var streamUrl:String?
-//    var imageUrl:String?
-//}
-
 import UIKit
 
 struct Category: Decodable {

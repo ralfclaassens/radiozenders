@@ -1,8 +1,8 @@
 import UIKit
 
 protocol MusicCellProtocol {
-    func didTapSeeAll(cell:MusicCell,indexPath:IndexPath)
-    func didTapOnTrack(cell:MusicCell,indexPath:IndexPath)
+    func didTapSeeAll(cell: MusicCell, indexPath: IndexPath)
+    func didTapOnTrack(cell: MusicCell, indexPath: IndexPath)
 }
 
 class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
@@ -24,7 +24,6 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
     }
 
     @IBAction func didTapOnSeeAll(_ sender: Any) {
@@ -35,10 +34,9 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
 
-    func setCollectionViewDataSourceDelegate(index:IndexPath,stations:[Station]){
+    func setCollectionViewDataSourceDelegate(index: IndexPath, stations: [Station]){
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         indexPath = index
@@ -79,7 +77,7 @@ class MusicCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 185)
+        return CGSize(width: 120, height: 120)
     }
 
 }

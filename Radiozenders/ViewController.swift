@@ -18,14 +18,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var categories = [Category]()
     var audioPlayer:AVPlayer?
     var myTimer:Timer!
-    var sectionHeaders = ["NPO stations","100%NL stations","Sky Radio stations","538 stations","SLAM! stations"]
     var isPlaying = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
     }
-    
 
     func initialSetup(){
         customNavbar()
@@ -42,14 +40,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
+
         let session = URLSession(configuration: URLSessionConfiguration.default)
-        
+
         session.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }
-            
+
             guard let data = data else { return }
 
             do {
@@ -58,14 +56,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                
             } catch let jsonError {
                 print(jsonError)
-            }            
-            
+            }
+
         }.resume()
     }
-    
+
     func customNavbar(){
         self.title = "Radiozenders"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white,NSAttributedStringKey.font:UIFont(name: "Verdana-Bold", size: 15)!]
@@ -89,22 +86,21 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MusicCell
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             cell.seeAllButton.isHidden = true
             cell.cellBg.backgroundColor = UIColor.black
             cell.sectionHeader.textColor = UIColor.white
-            cell.sectionHeader.text = sectionHeaders[0]
+            cell.sectionHeader.text = categories[0].name
 
-        }else{
+        } else {
             cell.seeAllButton.isHidden = false
-            cell.sectionHeader.text = sectionHeaders[indexPath.row]
+            cell.sectionHeader.text = categories[indexPath.row].name
             cell.cellBg.backgroundColor = UIColor.white
             cell.sectionHeader.textColor = UIColor.black
-
         }
 
         let category = self.categories[indexPath.row]
-        cell.setCollectionViewDataSourceDelegate(index: indexPath,stations:category.Stations)
+        cell.setCollectionViewDataSourceDelegate(index: indexPath, stations: category.Stations)
         cell.delegate = self
 
         return cell
@@ -117,6 +113,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("TableView:\(indexPath)")
     }
+
     func addBlurToPlayer(){
         let blur =  UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blur)
@@ -138,40 +135,46 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func playStation(station: Station){
         tableView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: playerBlur.frame.height, right: 0)
         trackPlayerView.isHidden = false
-        let musicURL = URL(string:station.stream)
 
-        self.audioPlayer = AVPlayer(url: musicURL!)
+        let http = station.stream
+        var comps = URLComponents(string: http)!
+        comps.scheme = "https"
+//        let httpsUrl = comps.string!
+        let httpsUrl = "https://19113.live.streamtheworld.com/TLPSTR09.mp3"
+
+        self.audioPlayer = AVPlayer(url: URL(string:httpsUrl)!)
         self.audioPlayer?.play()
-        playPauseButton.setImage(UIImage(named:"pause"), for: .normal)
+        playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
         
-        mTrackImage.setImageWithUrl(url: NSURL(string:station.image)!)
+        let imageBase = "https://www.radiozenders.fm/media/images/stations/"
+        mTrackImage.setImageWithUrl(url: NSURL(string:imageBase + station.image)!)
         mName.text = station.name
     }
 
     @objc func updateProgressBar(){
 
-        let t1 =  self.audioPlayer?.currentTime()
-        let t2 =  self.audioPlayer?.currentItem?.asset.duration
+//        let t1 =  self.audioPlayer?.currentTime()
+//        let t2 =  self.audioPlayer?.currentItem?.asset.duration
+//
+//        let current = CMTimeGetSeconds(t1!)
+//        let total = CMTimeGetSeconds(t2!)
 
-        let current = CMTimeGetSeconds(t1!)
-        let total = CMTimeGetSeconds(t2!)
-
-        if Int(current) != Int(total){
-
-            let min = Int(current) / 60
-            let sec =  Int(current) % 60
-            mDuration.text = String(format: "%02d:%02d", min,sec)
-            let percent = (current/total)
-
-            self.progressBar.setProgress(Float(percent), animated: true)
-            print("percent \(percent) - \(current) \(total)")
-        }else{
-            audioPlayer?.pause()
-            audioPlayer = nil
-            myTimer.invalidate()
-            myTimer = nil
-        }
+//        if Int(current) != Int(total){
+//
+//            let min = Int(current) / 60
+//            let sec =  Int(current) % 60
+//            mDuration.text = String(format: "%02d:%02d", min,sec)
+//            let percent = (current/total)
+//
+//            self.progressBar.setProgress(Float(percent), animated: true)
+//            print("percent \(percent) - \(current) \(total)")
+//        }else{
+//            audioPlayer?.pause()
+//            audioPlayer = nil
+//            myTimer.invalidate()
+//            myTimer = nil
+//        }
     }
 
     @IBAction func didTapOnPause(_ sender: Any) {
@@ -186,7 +189,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             playPauseButton.setImage(UIImage(named:"play"), for: .normal)
         }
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

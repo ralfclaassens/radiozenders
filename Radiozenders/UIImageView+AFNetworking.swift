@@ -13,9 +13,7 @@ extension UIImageView {
     }
 
     public class func setSharedImageCache(cache:AFImageCacheProtocol?) {
-//        objc_setAssociatedObject(self, &AssociatedKeys.SharedImageCache, cache, UInt(OBJC_ASSOCIATION_RETAIN))
         objc_setAssociatedObject(self, &AssociatedKeys.SharedImageCache, cache, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-
     }
 
     public class func sharedImageCache() -> AFImageCacheProtocol {
@@ -51,10 +49,7 @@ extension UIImageView {
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.RequestImageOperation, newValue.operation, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
-//            objc_setAssociatedObject(self, &AssociatedKeys.RequestImageOperation, newValue.operation, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
             objc_setAssociatedObject(self, &AssociatedKeys.URLRequestImage, newValue.request, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-
-//            objc_setAssociatedObject(self, &AssociatedKeys.URLRequestImage, newValue.request, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         }
     }
 
