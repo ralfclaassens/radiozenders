@@ -139,10 +139,23 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let http = station.stream
         var comps = URLComponents(string: http)!
         comps.scheme = "https"
-//        let httpsUrl = comps.string!
-        let httpsUrl = "https://19113.live.streamtheworld.com/TLPSTR09.mp3"
+        let httpsUrl = comps.string!
+        
+        guard let url = URL(string: httpsUrl) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
 
-        self.audioPlayer = AVPlayer(url: URL(string:httpsUrl)!)
+            let requestUrl = request.url! as URL
+            let urlResponse = response! as URLResponse
+            let responseUrl = urlResponse.url! as URL
+        }.resume()
+
+        self.audioPlayer = AVPlayer(url: URL(string: httpsUrl)!)
         self.audioPlayer?.play()
         playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
