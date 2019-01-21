@@ -155,7 +155,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let responseUrl = urlResponse.url! as URL
         }.resume()
 
-        self.audioPlayer = AVPlayer(url: URL(string: httpsUrl)!)
+        let playerItem = AVPlayerItem(url: URL(string:httpsUrl)!)
+        playerItem.addObserver(self, forKeyPath: "timedMetadata", options: NSKeyValueObservingOptions(), context: nil)
+
+        self.audioPlayer = AVPlayer(playerItem: playerItem)
         self.audioPlayer?.play()
         playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
@@ -163,6 +166,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let imageBase = "https://www.radiozenders.fm/media/images/stations/"
         mTrackImage.setImageWithUrl(url: NSURL(string:imageBase + station.image)!)
         mName.text = station.name
+        mName.layer.zPosition = 1;
     }
 
     @objc func updateProgressBar(){
@@ -210,5 +214,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func observeValue(forKeyPath: String?, of: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if forKeyPath != "timedMetadata" { return }
+        
+        let data: AVPlayerItem = of as! AVPlayerItem
+        
+        for item in data.timedMetadata! {
+            let currentSong = item.value! as! String
+            mName.text = currentSong
+            print(item.value!)
+        }
+    }
+    
+    
 
 }

@@ -45,7 +45,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qD-5i-vnb">
                                         <rect key="frame" x="78" y="0.0" width="297" height="80"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-yz-FTs">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-yz-FTs">
                                                 <rect key="frame" x="8" y="30" width="251" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="qd4-WV-mgT"/>
@@ -53,6 +53,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -62,6 +63,7 @@
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="DU1-HC-Vak">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="TVw-le-DMM"/>
                                             <constraint firstAttribute="height" constant="80" id="e4l-6U-0Bw"/>
@@ -127,8 +129,8 @@
                     <navigationItem key="navigationItem" id="vCS-c0-wox"/>
                     <connections>
                         <outlet property="mDuration" destination="JfY-60-L1U" id="ukq-Uk-5RL"/>
-                        <outlet property="mTrackImage" destination="DU1-HC-Vak" id="6RU-N1-Uz3"/>
                         <outlet property="mName" destination="0Qd-yz-FTs" id="Qcu-Aa-eE2"/>
+                        <outlet property="mTrackImage" destination="DU1-HC-Vak" id="6RU-N1-Uz3"/>
                         <outlet property="playPauseButton" destination="Xsr-yZ-ZML" id="6eM-i6-RKj"/>
                         <outlet property="playerBlur" destination="1qD-5i-vnb" id="pFp-9m-I0p"/>
                         <outlet property="progressBar" destination="ihP-Iw-4WL" id="NP1-Ho-qQG"/>
